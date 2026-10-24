@@ -32,7 +32,7 @@ public class EtudiantControllerTest {
         .thenReturn(List.of(new Etudiant ("Mballa", "Jean", "jean@mail.cm", "ASIC")));
         List<Etudiant> resultat = controller.lister();
         assertEquals(1, resultat.size());
-        assertEquals("Nkana", resultat.get(0).getNom());
+        assertEquals("Mballa", resultat.get(0).getNom());
         assertEquals("Jean", resultat.get(0).getPrenom());
         assertEquals("ASIC", resultat.get(0).getFiliere());
     }
