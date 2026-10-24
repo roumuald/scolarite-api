@@ -73,4 +73,14 @@ void getEtudiantIfNotExiste() {
     verify(repository).findById(id);
 }
     
+
+    @Test
+void creerEnregistreLEtudiant() {
+ Etudiant etudiant = new Etudiant("Ngono", "Marie", "marie@mail.cm", "ASIC");
+ when(repository.save(etudiant)).thenReturn(etudiant);
+ Etudiant resultat = controller.creer(etudiant);
+ assertEquals("Ngono", resultat.getNom());
+ verify(repository).save(etudiant);
+}
+
 }
