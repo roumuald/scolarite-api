@@ -17,6 +17,56 @@ jobs:
       - run: chmod +x mvnw
 
       - run: ./mvnw -B verify
+      
+      - name: Afficher la couverture JaCoCo
+        if: success()
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+
+          report = ET.parse("target/site/jacoco/jacoco.xml")
+          root = report.getroot()
+
+          counters = {
+              counter.attrib["type"]: counter.attrib
+              for counter in root.findall("counter")
+          }
+
+          def percentage(counter_type):
+              counter = counters.get(counter_type)
+              if not counter:
+                  return "N/A"
+
+              covered = int(counter["covered"])
+              missed = int(counter["missed"])
+              total = covered + missed
+
+              if total == 0:
+                  return "N/A"
+
+              return f"{covered * 100 / total:.2f}%"
+
+          lines = [
+              "## Couverture de code JaCoCo",
+              "",
+              "| Mesure | Couverture |",
+              "|---|---:|",
+              f"| Instructions | {percentage('INSTRUCTION')} |",
+              f"| Lignes | {percentage('LINE')} |",
+              f"| Branches | {percentage('BRANCH')} |",
+          ]
+
+          summary = "\n".join(lines) + "\n"
+
+          with open(
+              __import__("os").environ["GITHUB_STEP_SUMMARY"],
+              "a",
+              encoding="utf-8"
+          ) as file:
+              file.write(summary)
+
+          print(summary)
+          PY
 
       - uses: actions/upload-artifact@v4
         with:
