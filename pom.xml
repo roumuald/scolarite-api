@@ -75,6 +75,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<version>0.8.14</version>
+
+<executions>
+	<!-- Prépare la mesure de couverture -->
+	<execution>
+		<goals>
+			<goal>prepare-agent</goal>
+		</goals>
+	</execution>
+
+	<!-- Génère le rapport de couverture -->
+	<execution>
+		<id>report</id>
+		<phase>verify</phase>
+		<goals>
+			<goal>report</goal>
+		</goals>
+	</execution>
+</executions>
+</plugin>
+
 		</plugins>
 	</build>
 

@@ -72,7 +72,10 @@ void getEtudiantIfNotExiste() {
 
     verify(repository).findById(id);
 }
-
+    
+/**
+ * test unitaire pour l'enregistrement d'un etudiant!!!
+ */
 @Test
 void creerEnregistreLEtudiant() {
  Etudiant etudiant = new Etudiant("Ngono", "Marie", "marie@mail.cm", "ASIC");
