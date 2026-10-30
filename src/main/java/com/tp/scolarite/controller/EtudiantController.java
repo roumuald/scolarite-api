@@ -26,7 +26,7 @@ public class EtudiantController {
     @GetMapping
     public List<Etudiant> lister() { return repository.findAll(); }
 
-    @PostMapping
+     @PostMapping
     public Etudiant creer(@RequestBody Etudiant etudiant) {
         return repository.save(etudiant);
     }
