@@ -72,3 +72,28 @@ jobs:
         with:
           name: application-jar
           path: target/*.jar
+
+
+  docker:
+    needs: build-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        packages: write
+    steps:
+        - uses: actions/checkout@v4
+        - uses: docker/login-action@v3
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+        - id: nom
+          run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+        - uses: docker/build-push-action@v6
+          with:
+            context: .
+            push: true
+            tags: |
+              ${{ steps.nom.outputs.image }}:${{ github.sha }}
+              ${{ steps.nom.outputs.image }}:latest
