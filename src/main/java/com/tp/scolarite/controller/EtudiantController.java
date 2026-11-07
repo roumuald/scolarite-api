@@ -19,6 +19,7 @@ public class EtudiantController {
 
     private final EtudiantRepository repository;
 
+    /** Constructeur de ma classe controlleur */
     public EtudiantController(EtudiantRepository repository) {
         this.repository = repository;
     }
