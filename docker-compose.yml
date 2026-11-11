@@ -15,6 +15,7 @@ services:
       retries: 10
     restart: unless-stopped
 
+  
   clearapp:
     build:
       context: .
