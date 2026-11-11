@@ -1,6 +1,7 @@
 spring:
   application:
     name: scolarite
+  
 
 server:
   port: 8081
