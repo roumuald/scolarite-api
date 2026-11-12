@@ -1,0 +1,14 @@
+
+# Dossier de travail Terraform
+.terraform/
+
+# Fichiers d'état Terraform
+*.tfstate
+*.tfstate.*
+
+# Variables sensibles
+terraform.tfvars
+*.tfvars
+
+# Fichiers de crash
+crash.log
